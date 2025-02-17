@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// สร้าง instance ของ express
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -22,6 +23,10 @@ mongoose.connect(process.env.MONGO_URI, {
 app.get('/', (req, res) => {
     res.send('🎉 Welcome to REST API!');
 });
+
+// กำหนดเส้นทาง (routes)
+const productRoutes = require('./routes/productRoutes');
+app.use('/api', productRoutes);
 
 // เริ่มต้นเซิร์ฟเวอร์
 app.listen(PORT, () => {
